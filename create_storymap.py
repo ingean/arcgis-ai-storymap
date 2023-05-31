@@ -1,4 +1,4 @@
-import requests, io
+import requests, io, os, json
 import urllib.request
 from PyPDF2 import PdfReader
 
@@ -7,16 +7,19 @@ from arcgis.apps.storymap import StoryMap
 from arcgis.apps.storymap.story_content import Image, Text, Map
 
 # ChatGPT variables
-GPT_KEY = "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"
-
+GPT_KEY = os.environ["OPENAI_API_KEY"]
 GPT_URL = "https://api.openai.com/v1/"
 GPT_TEXT_URL = f"{GPT_URL}chat/completions"
 GPT_IMAGE_URL = f"{GPT_URL}images/generations"
 
+ARCGIS_KEY = os.environ["ARCGIS_API_KEY"]
+gis = GIS(api_key=ARCGIS_KEY)
 
-gis = GIS("https://geodata.maps.arcgis.com")
+config_file = open("config.json")
+config = json.load(config_file)
 
-def request_gpt(url, data):
+
+def request_gpt(url, data, key = "choices"):
   headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {GPT_KEY}"
@@ -27,8 +30,8 @@ def request_gpt(url, data):
   if "error" in r.json():
     print(r.json())
     return None
-    
-  return r.json()
+  else:
+    return r.json()[key][0]
 
 def create_image(prompt, size = "1024x1024"):
   data = {
@@ -36,12 +39,9 @@ def create_image(prompt, size = "1024x1024"):
     "size": size
   }
     
-  res = request_gpt(GPT_IMAGE_URL, data)
-    
-  if res is not None:
-    return res["data"][0]["url"]
-  else:
-    return None
+  result = request_gpt(GPT_IMAGE_URL, data, "data")  
+  return result["url"]
+
 
 def create_text(prompt):
   data = {
@@ -49,20 +49,15 @@ def create_text(prompt):
     "messages": [
       {
         "role": "user",
-        "content": "Skriv et kort innlegg om nye Bodø"
+        "content": prompt
       }
     ]
   }
   
-  res = request_gpt(GPT_TEXT_URL, data)
+  result = request_gpt(GPT_TEXT_URL, data)
+  return result["message"]["content"]
   
-  if res is not None: 
-    return res["choices"][0]["message"]["content"]
-  else:
-    return None
-
-def text_from_pdf(url):
-    
+def text_from_pdf(url):  
   req = urllib.request.Request(url)
   remote_file = urllib.request.urlopen(req).read()
   remote_file_bytes = io.BytesIO(remote_file)
@@ -92,7 +87,13 @@ def create_storymap():
   for section in config["sections"]:
     story.add(create_node(section))
     
-  story.cover(title=config["cover"]["title"], image=create_image(config["cover"]["image"]))
-   
+  story.cover(title=config["cover"]["title"], by_line="En historie skrevet av ChatGPT", image=create_image(config["cover"]["image"]))
   story.save(title="Bodø by ChatGPT", publish=True)
   print(story.nodes)
+
+def main():
+  create_storymap()
+
+###############################################################################
+if __name__ == "__main__":
+   main()
