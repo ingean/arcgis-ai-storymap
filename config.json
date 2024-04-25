@@ -1,40 +1,37 @@
 {
   "cover": {
-      "title": "Velkommen til nye Bodø!",
-      "image": "Utsikt over fjellene rundt Bodø"
+    "title": "Velkommen til nye Bodø!",
+    "image": "Utsikt over fjellene rundt Bodø"
   },
   "sections": [
-      {
-          "type": "text",
-          "title": "Introduksjon",
-          "prompt": "Skriv et kort innlegg om nye Bodø"
-      },
-      {
-          "type": "image",
-          "prompt": "Naturskjønt og klimavennlig nabolag i Bodø"
-      },
-      {
-          "type": "map",
-          "item": "b8b44b692ed14890ba8e46b2cc4acbc3"
-      },
-      {
-          "type": "text",
-          "title": "Kommundedelplan",
-          "prompt": "Skriv en oppsummering av kommunedelplanen for Bodø"
-      },
-      {
-          "type": "summary",
-          "title": "Kommundedelplan",
-          "url": "https://bodo.kommune.no/getfile.php/1363756-1656434827/Plan%2C%20bygg%20og%20eiendom/Kart%20og%20arealplaner/Arealplaner/Kommuneplan/KPA%202022%20-%202034/Vedtak/KPA%202022%20-%20Planbeskrivelse%2009.05.2022%20-%20oppdatert%20etter%20vedtak.pdf"
-      },
-      {
-          "type": "image",
-          "prompt": "Arealplaner for Bodø"
-      },
-      {
-          "type": "text",
-          "title": "Oppsummering",
-          "prompt": "Skriv en oppsummering av fordelene med en klimavennlig og smart by i Bodø",
-      }
+    {
+        "type": "text",
+        "title": "Introduksjon",
+        "prompt": "Skriv et kort innlegg om nye Bodø"
+    },
+    {
+        "type": "image",
+        "prompt": "Naturskjønt og klimavennlig nabolag i Bodø"
+    },
+    {
+        "type": "map",
+        "item": "b8b44b692ed14890ba8e46b2cc4acbc3"
+    },
+    {
+        "type": "summary",
+        "title": "Planbeskrivelse, innledning",
+        "url": "https://bodo.kommune.no/getfile.php/1363756-1656434827/Plan%2C%20bygg%20og%20eiendom/Kart%20og%20arealplaner/Arealplaner/Kommuneplan/KPA%202022%20-%202034/Vedtak/KPA%202022%20-%20Planbeskrivelse%2009.05.2022%20-%20oppdatert%20etter%20vedtak.pdf",
+        "pages": [4,5]
+    },
+    {
+        "type": "summary",
+        "title": "Planbeskrivelse, Bodø sentrum",
+        "url": "https://bodo.kommune.no/getfile.php/1363756-1656434827/Plan%2C%20bygg%20og%20eiendom/Kart%20og%20arealplaner/Arealplaner/Kommuneplan/KPA%202022%20-%202034/Vedtak/KPA%202022%20-%20Planbeskrivelse%2009.05.2022%20-%20oppdatert%20etter%20vedtak.pdf",
+        "pages": [26,27,28]
+    },
+    {
+        "type": "image",
+        "prompt": "Arealplaner for Bodø"
+    }
   ]
 }
